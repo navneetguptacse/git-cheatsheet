@@ -33,7 +33,7 @@ git show <commit-id>          # Show details of a commit
 git add <file>                # Stage a specific file
 git add .                     # Stage all changes
 git commit -m "message"       # Commit staged changes
-git commit -am "message"      # Stage + commit (tracked files only)
+git commit -am "message"      # Stage + commit (equivalent to: git add -u && git commit)
 ```
 
 ### 5. Compare Changes
@@ -47,12 +47,17 @@ git diff <branch1>..<branch2> # Compare two branches
 ### 6. Branching
 
 ```bash
-git branch                    # List branches
-git branch <name>             # Create new branch
-git switch <branch>           # Switch to branch
-git switch -c <name>          # Create + switch branch
-git checkout <branch>         # Old way to switch branch
-git checkout -b <name>        # Old way create + switch
+git branch                         # List branches
+git branch <name>                  # Create new branch
+git switch <branch>                # Switch to branch
+git switch -c <name>               # Create + switch branch
+git checkout <branch>              # Old way to switch branch
+git checkout -b <name>             # Old way create + switch
+git branch --merged                # Show branches already merged into current branch
+git branch --no-merged             # Show branches NOT yet merged
+git branch -d <branch>             # Delete a local branch (safe: only if merged)
+git branch -D <branch>             # Force delete a local branch (even if not merged)
+git push origin --delete <branch>  # Delete a remote branch
 ```
 
 ### 7. Merge & Rebase
@@ -72,8 +77,8 @@ git remote add origin <url>   # Add remote repository
 git remote remove origin      # Remove remote
 git remote rename old new     # Rename remote
 
-git remote set-url origin <url>     # Change remote URL
-git remote set-url --add origin <url>   # Add another URL to remote
+git remote set-url origin <url>          # Change remote URL
+git remote set-url --add origin <url>    # Add another URL to remote
 git remote set-url --delete origin <url> # Remove specific URL
 
 git fetch                     # Fetch changes from remote
@@ -93,7 +98,7 @@ git restore --staged <file>   # Unstage file
 
 git reset HEAD <file>         # Unstage file (older way)
 git reset --soft HEAD~1       # Undo commit (keep changes)
-git reset --hard HEAD         # Reset everything (danger)
+git reset --hard HEAD         # Reset everything (danger) | Undo commit (remove changes)
 
 git revert <commit-id>        # Undo commit safely (creates new commit)
 ```
